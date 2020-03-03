@@ -1,0 +1,47 @@
+table, tr, td{
+    border-collapse: collapse;
+}
+
+.staging_spot, .wall_spot{
+    width: 50px;
+    height: 50px;
+    border: 1px solid black;
+}
+
+.staging_spot{
+    background-color: lightgray;
+}
+
+.placed{
+    background-color: tan;
+}
+
+.A{
+    background-color: red;
+    opacity: .25;
+}
+
+.B{
+    background-color: orange;
+    opacity: .25;
+}
+
+.C{
+    background-color: yellow;
+    opacity: .25;
+}
+
+.D{
+    background-color: green;
+    opacity: .25;
+}
+
+.E{
+    background-color: blue;
+    opacity: .25;
+}
+
+.placed{
+    /* background-color: tan; */
+    opacity: 1;
+}
