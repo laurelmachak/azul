@@ -83,40 +83,58 @@ class Row {
         }
     }
 
+   
     place_staging_tile(tile){
 
-        // if (this.staging.has_tiles()){
-        //     if (this.staging.is_full()){
-        //         return tile;
-        //     } else {
-        //         this.staging.get_current_color();
-        //     }
-        // } else {
-
-        // }
-
-        this.available_staging_colors();
-        if (this.staging.is_full()){
-            return tile;
-        } else if (this.staging.allowed_colors.includes(tile.color)){ //FIXX
-
-            let empty_space = this.next_empty_staging_spot();
-
-            empty_space.place_tile(tile);
-
-            // this.staging.spots.forEach(function(spot){
-            //     if (spot.placed_tile === null){
-            //         spot.place_tile(tile);
-            //         return;
-            //     } 
-            // })
-
-
+        if (this.staging.has_tiles()){
+            this.staging.allowed_colors = [this.staging.spots[0].placed_tile.color];
+            console.log('this.staging.spots', this.staging.spots);
+            if (this.staging.is_full()){
+                return tile;
+            } else {
+                // this.staging.available_colors = this.staging.get_current_color();
+                // this.staging.available_colors = [];
+                // this.staging.available_colors.push(this.staging.spots[0].placed_tile.color);
+                if (!(this.staging.allowed_colors.includes(tile.color))){
+                    return tile;
+                }
+            }
         } else {
 
-            return tile;
+            this.staging.allowed_colors = this.available_wall_colors();
+            console.log(this.staging.av)
+            if (!(this.staging.allowed_colors.includes(tile.color))){
+                return tile;
+            }
 
         }
+
+        console.log('allowed colors', this.staging.allowed_colors);
+        let empty_space = this.next_empty_staging_spot();
+        empty_space.place_tile(tile);
+
+        // this.available_staging_colors();
+        // if (this.staging.is_full()){
+        //     return tile;
+        // } else if (this.staging.allowed_colors.includes(tile.color)){ //FIXX
+
+        //     let empty_space = this.next_empty_staging_spot();
+
+        //     empty_space.place_tile(tile);
+
+        //     // this.staging.spots.forEach(function(spot){
+        //     //     if (spot.placed_tile === null){
+        //     //         spot.place_tile(tile);
+        //     //         return;
+        //     //     } 
+        //     // })
+
+
+        // } else {
+
+        //     return tile;
+
+        // }
     }
 
 }
@@ -169,7 +187,7 @@ class Staging_Row {
     get_current_color(){
         if (this.spots[0].placed_tile != null) {
             this.allowed_colors = [this.spots[0].placed_tile.color];
-            console.log(this.allowed_colors);
+            console.log('staging_row.allowed_colors', this.allowed_colors);
             return this.spots[0].placed_tile.color;
         }
     }
@@ -312,6 +330,13 @@ function random_playing_area() {
         area.rows[row].wall.place_tile(random_tiles[i]);
     }
 
+    random_tiles = pick_random_tiles();
+    
+    for (let i=0; i<random_tiles.length; i++){
+        let row = Math.ceil(Math.random() * 4);
+        area.rows[row].place_staging_tile(random_tiles[i]);
+    }
+
     return area;
 
 
@@ -422,16 +447,18 @@ function display_as_html(area){
                 td.classList.add('placed');
             }
 
-            td.addEventListener('click', function(){
-                row.place_staging_tile(placing_tile);
+            // td.addEventListener('click', function(){
+            //     row.place_staging_tile(placing_tile);
                 
-                if (staging_spot.placed_tile === placing_tile){
-                    td.classList.add(staging_spot.placed_tile.color);
-                    td.classList.add('placed');
-                }
+            //     if (staging_spot.placed_tile === placing_tile){
+            //         console.log('staging_spot.placed_tile', staging_spot.placed_tile);
+            //         console.log('placing_tile', placing_tile);
+            //         td.classList.add(staging_spot.placed_tile.color);
+            //         td.classList.add('placed');
+            //     }
 
                 
-            })
+            // })
 
             // td.innerText = staging_spot.placed_tile;
             table_rows[html_tr_index].appendChild(td);

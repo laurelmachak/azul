@@ -21,32 +21,30 @@ table, tr, td{
     background-color: lightgray;
 }
 
-.placed{
-    background-color: tan;
-}
+
 
 .A{
-    background-color: red;
+    background-color: #fa001d;
     opacity: .25;
 }
 
 .B{
-    background-color: orange;
+    background-color: #282828;
     opacity: .25;
 }
 
 .C{
-    background-color: yellow;
+    background-color: #fac400;
     opacity: .25;
 }
 
 .D{
-    background-color: green;
+    background-color: #00e0b8;
     opacity: .25;
 }
 
 .E{
-    background-color: blue;
+    background-color: #007ff3;
     opacity: .25;
 }
 
