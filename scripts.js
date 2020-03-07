@@ -12,6 +12,7 @@ class Playing_Area {
     constructor() {
         this.rows = [];
         this.populate();
+        this.negatives = new Negative_Row();
 
     }
 
@@ -222,6 +223,29 @@ class Wall_Row {
         // first make sure has allowed colors
     }
 
+}
+
+class Negative_Row {
+
+    constructor(){
+        this.values = [-1, -1, -2, -2, -2, -3, -3];
+        this.spots = [];
+        this.initialize();
+    }
+
+    initialize(){
+        for (let i=0; i<this.values.length; i++){
+            this.spots.push(new Negative_Spot(this.values[i]));
+        }
+    }
+
+}
+
+class Negative_Spot {
+
+    constructor(value) {
+        this.value = value;
+    }
 }
 
 
