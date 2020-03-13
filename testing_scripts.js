@@ -12,6 +12,33 @@ colors.forEach(function (color) {
     }
 })
 
+function compare_staging_rows(expected_row, test_row) {
+    let expected_staging_spots = expected_row.staging.spots;
+    let test_staging_spots = test_row.staging.spots;
+
+    // compare staging
+
+    for (let i=0; i<expected_staging_spots.length; i++){
+        console.log(`expected_staging_spot: ${expected_staging_spots[i]}`, `test_staging_spot: ${test_staging_spots[i]}`);
+
+        if (expected_staging_spots[i].placed_tile === null) {
+
+            if (test_staging_spots[i].placed_tile != null){
+                console.log(`expected: ${expected_staging_spots[i].placed_tile}, but got ${test_staging_spots[i].placed_tile}`);
+                return false;
+            }
+
+              
+
+        } else if(expected_staging_spots[i].placed_tile.color != test_staging_spots[i].placed_tile.color) {
+
+            console.log(`expected: ${expected_staging_spots[i].placed_tile.color}, but got ${test_staging_spots[i].placed_tile.color}`);
+            return false;
+        }
+    }
+
+}
+
 function generate_blank_board_html() {
 
     for (let r = 0; r < 5; r++) {
@@ -185,6 +212,8 @@ generate_blank_board_html();
 let test_area = random_playing_area();
 display_playing_area(test_area);
 // console.log(table_rows);
+
+compare_staging_rows(test_area.rows[2], test_area.rows[2]);
 
 // Testing visual placing in staging
 
