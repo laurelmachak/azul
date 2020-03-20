@@ -14,25 +14,75 @@ colors.forEach(function (color) {
 
 
 
-function compare_2_spots(expected_spot, test_spot){
+
+
+
+function assert_spots_equal(expected_spot, actual_spot) {
 
     // if no placed_tile then spot_val is null, otherwise spot_val is color of placed_tile
-    let expected_val = (expected_spot.placed_tile === null) ? null:expected_spot.placed_tile.color;
-    let test_val = (test_spot.placed_tile === null) ? null:test_spot.placed_tile.color;
+    let expected_val = (expected_spot.placed_tile === null) ? null : expected_spot.placed_tile.color;
+    let actual_val = (actual_spot.placed_tile === null) ? null : actual_spot.placed_tile.color;
+
+
+    if (actual_val != expected_val) {
+        throw new Error(`SPOTS DO NOT MATCH: EXPECTED: ${expected_val} TESTED: ${actual_val}`);
+
+    }
+
+
+}
+
+function assert_wall_spots_allowed_colors(expected_colors, row){
+    // expect list with allowed colors in order e.g. [D, E, A, B, C]
+    // actual wall row then have to iterate over spots for allowed colors and compare against
+}
+
+
+
+function run_wall_row_creation_test(row_number, expected_colors) {
+    // create a row and place a tile
+    let row = new Wall_Row(row_number);
+    // row should have row_number spots
+    // assert row.spots.length = row_number; make assertion method
+    // assert_equals(5, row.spots.length);
+    // assert_equals(row_number, row.row_number);
+
+    assert_wall_spots_allowed_colors(expected_colors, row);
+
+    // ['A', 'B', 'C', 'D', 'E']
+}
+
+function test_wall_row_creation(){
+    run_wall_row_creation_test(1, ['A', 'B', 'C', 'D', 'E']);
+    run_wall_row_creation_test(2, ['E', 'A', 'B', 'C', 'D']); 
+    run_wall_row_creation_test(3, ['D', 'E','A', 'B', 'C']);
+    run_wall_row_creation_test(4, ['C', 'D', 'E', 'A', 'B']);
+    run_wall_row_creation_test(5, ['B', 'C', 'D', 'E', 'A']);
+}
+
+function run_test_suite(){
+    run_test_suite(test_wall_row_creation);
+     // add new lines for each tests;
+
+    
+}
+
+function run_test_case(test_function){
 
     try {
-
-        if (test_val != expected_val) {
-            throw new Error(`SPOTS DO NOT MATCH: EXPECTED: ${expected_val} TESTED: ${test_val}`);
-            
-        }
-
-        // if are equal:
-
-    } catch(err) {
-        console.log(err);
+        test_function(); // invoke test_function
+    } catch (error) {
+        console.log(error);
     }
 }
+
+
+
+
+
+
+
+
 
 function compare_staging_rows(expected_row, test_row) {
     let expected_staging_spots = expected_row.staging.spots;
@@ -40,19 +90,19 @@ function compare_staging_rows(expected_row, test_row) {
 
     // compare staging
 
-    for (let i=0; i<expected_staging_spots.length; i++){
+    for (let i = 0; i < expected_staging_spots.length; i++) {
         console.log(`expected_staging_spot: ${expected_staging_spots[i]}`, `test_staging_spot: ${test_staging_spots[i]}`);
 
         if (expected_staging_spots[i].placed_tile === null) {
 
-            if (test_staging_spots[i].placed_tile != null){
+            if (test_staging_spots[i].placed_tile != null) {
                 console.log(`expected: ${expected_staging_spots[i].placed_tile}, but got ${test_staging_spots[i].placed_tile}`);
                 return false;
             }
 
-              
 
-        } else if(expected_staging_spots[i].placed_tile.color != test_staging_spots[i].placed_tile.color) {
+
+        } else if (expected_staging_spots[i].placed_tile.color != test_staging_spots[i].placed_tile.color) {
 
             console.log(`expected: ${expected_staging_spots[i].placed_tile.color}, but got ${test_staging_spots[i].placed_tile.color}`);
             return false;
