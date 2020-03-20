@@ -12,6 +12,28 @@ colors.forEach(function (color) {
     }
 })
 
+
+
+function compare_2_spots(expected_spot, test_spot){
+
+    // if no placed_tile then spot_val is null, otherwise spot_val is color of placed_tile
+    let expected_val = (expected_spot.placed_tile === null) ? null:expected_spot.placed_tile.color;
+    let test_val = (test_spot.placed_tile === null) ? null:test_spot.placed_tile.color;
+
+    try {
+
+        if (test_val != expected_val) {
+            throw new Error(`SPOTS DO NOT MATCH: EXPECTED: ${expected_val} TESTED: ${test_val}`);
+            
+        }
+
+        // if are equal:
+
+    } catch(err) {
+        console.log(err);
+    }
+}
+
 function compare_staging_rows(expected_row, test_row) {
     let expected_staging_spots = expected_row.staging.spots;
     let test_staging_spots = test_row.staging.spots;
