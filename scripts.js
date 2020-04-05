@@ -183,7 +183,7 @@ class Wall_Row {
 
     initialize() {
         for (let i=0; i<5; i++){
-            this.spots.push(new Wall_Spot(colors[(this.row_number + i) % 5]));
+            this.spots.push(new Wall_Spot(colors[((this.row_number -1 ) + i) % 5]));
         }
     }
 

@@ -25,7 +25,7 @@ function assert_spots_equal(expected_spot, actual_spot) {
 
 
     if (actual_val != expected_val) {
-        throw new Error(`SPOTS DO NOT MATCH: EXPECTED: ${expected_val} TESTED: ${actual_val}`);
+        throw new Error(`SPOTS DO NOT MATCH: EXPECTED: ${expected_val} ACTUAL: ${actual_val}`);
 
     }
 
