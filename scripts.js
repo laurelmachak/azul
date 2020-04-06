@@ -2,6 +2,7 @@
 class Game_Controller {
     constructor(){
         this.tile_colors = ['A', 'B', 'C', 'D', 'E'];
+        // this.tile_colors = ['E', 'D', 'C', 'B', 'A'];
         this.tiles = [];
     }
 }
@@ -183,8 +184,10 @@ class Wall_Row {
 
     initialize() {
         for (let i=0; i<5; i++){
-            this.spots.push(new Wall_Spot(colors[((this.row_number -1 ) + i) % 5]));
+            this.spots.push(new Wall_Spot(colors[((6 - this.row_number) + i) % 5]));
+            
         }
+        console.log("SPOTS", this.row_number, this.spots);
     }
 
     get_allowed_colors(){
